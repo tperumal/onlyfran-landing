@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRAN — Your life, organized</title>
+  <meta name="description" content="Brutalist life management app. Tasks, meals, fitness, money, career, hobbies, weekend planning. Voice commands via AI.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='68' text-anchor='middle' fill='%23fff' font-size='50' font-family='sans-serif' font-weight='900'>F</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
+
+    :root {
+      --fg: #000000;
+      --bg: #ffffff;
+      --fg-50: rgba(0,0,0,0.5);
+      --fg-25: rgba(0,0,0,0.25);
+      --fg-10: rgba(0,0,0,0.1);
+      --accent: #0038FF;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #ffffff;
+        --bg: #0a0a0a;
+        --fg-50: rgba(255,255,255,0.5);
+        --fg-25: rgba(255,255,255,0.25);
+        --fg-10: rgba(255,255,255,0.1);
+        --accent: #0038FF;
+      }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 120px 0 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .hero .tagline {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--fg-50);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 48px;
+    }
+
+    .hero .description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* CTA */
+    .cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .cta a {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: 2px solid var(--fg);
+      transition: all 0.1s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cta-primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .cta-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: var(--fg);
+    }
+
+    .cta-secondary:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-top: 2px solid var(--fg);
+    }
+
+    section h2 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-50);
+      margin-bottom: 32px;
+    }
+
+    /* Modules grid */
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .module {
+      border: 2px solid var(--fg);
+      padding: 20px;
+    }
+
+    .module h3 {
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .module p {
+      font-size: 0.75rem;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      color: var(--fg-50);
+      line-height: 1.5;
+    }
+
+    /* Features list */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .feature-marker {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--fg-50);
+      flex-shrink: 0;
+      width: 24px;
+    }
+
+    .feature p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Stack */
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack span {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.65rem;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 2px solid var(--fg);
+      margin-top: 0;
+    }
+
+    footer p {
+      font-size: 0.65rem;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      color: var(--fg-50);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    footer a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--fg);
+    }
+
+    footer a:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 80px 0 60px; }
+      .modules { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>FRAN</h1>
+      <p class="tagline">Your life, organized</p>
+      <p class="description">
+        A brutalist life management app. Eight modules — tasks, fitness, meals, career, money, hobbies, weekends, and a dashboard that ties it all together. Voice commands powered by AI. No clutter, no decoration, just function.
+      </p>
+      <div class="cta">
+        <a href="https://app.onlyfran.co" class="cta-primary">Open App</a>
+        <a href="https://github.com/tperumal/fran" class="cta-secondary">Source</a>
+      </div>
+    </div>
+
+    <section>
+      <h2>Modules</h2>
+      <div class="modules">
+        <div class="module">
+          <h3>Tasks</h3>
+          <p>To-dos with smart sorting and categories</p>
+        </div>
+        <div class="module">
+          <h3>Fitness</h3>
+          <p>Workout tracking and streaks</p>
+        </div>
+        <div class="module">
+          <h3>Meals</h3>
+          <p>Meal planning and grocery lists</p>
+        </div>
+        <div class="module">
+          <h3>Career</h3>
+          <p>Milestones and achievements</p>
+        </div>
+        <div class="module">
+          <h3>Money</h3>
+          <p>Bills and financial tracking</p>
+        </div>
+        <div class="module">
+          <h3>Hobbies</h3>
+          <p>Media and hobby tracking</p>
+        </div>
+        <div class="module">
+          <h3>Weekend</h3>
+          <p>Weekend activity planning</p>
+        </div>
+        <div class="module">
+          <h3>Dashboard</h3>
+          <p>Everything at a glance</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-marker">01</span>
+          <p>Pin your most-used modules to the bottom nav. Swap them anytime from the menu.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-marker">02</span>
+          <p>Use voice commands to add tasks, groceries, bills, or workouts without touching the screen.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-marker">03</span>
+          <p>Everything syncs across devices via Supabase. Works as a PWA or native iOS app.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Built with</h2>
+      <div class="stack">
+        <span>React 19</span>
+        <span>Vite</span>
+        <span>Supabase</span>
+        <span>Claude API</span>
+        <span>Capacitor</span>
+        <span>Vercel</span>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built by <a href="https://toddperumal.com">Todd Perumal</a></p>
+    </footer>
+  </div>
+</body>
+</html>
