@@ -184,6 +184,53 @@
       line-height: 1.6;
     }
 
+    /* Releases */
+    .releases {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .release {
+      display: flex;
+      gap: 24px;
+      align-items: baseline;
+    }
+
+    .release-date {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--fg-50);
+      flex-shrink: 0;
+      width: 100px;
+      letter-spacing: 0.05em;
+    }
+
+    .release-body h3 {
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .release-body p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    @media (max-width: 600px) {
+      .release {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .release-date {
+        width: auto;
+      }
+    }
+
     /* Stack */
     .stack {
       display: flex;
@@ -243,7 +290,7 @@
       <h1>FRAN</h1>
       <p class="tagline">Your life, organized</p>
       <p class="description">
-        A brutalist life management app. Eight modules — tasks, fitness, meals, career, money, hobbies, weekends, and a dashboard that ties it all together. Voice commands powered by AI. No clutter, no decoration, just function.
+        A brutalist life management app. Nine modules grouped into Daily, Growth, and Life — tasks, week, meals, fitness, career, goals, money, hobbies, weekends — and a dashboard that ties it all together. Dictate a brain dump and Claude routes it into the right places. No clutter, no decoration, just function.
       </p>
       <div class="cta">
         <a href="https://app.onlyfran.co" class="cta-primary">Open App</a>
@@ -259,16 +306,24 @@
           <p>To-dos with smart sorting and categories</p>
         </div>
         <div class="module">
-          <h3>Fitness</h3>
-          <p>Workout tracking and streaks</p>
+          <h3>Week</h3>
+          <p>Weekly calendar with events and recurring items</p>
         </div>
         <div class="module">
           <h3>Meals</h3>
           <p>Meal planning and grocery lists</p>
         </div>
         <div class="module">
+          <h3>Fitness</h3>
+          <p>Workout tracking and streaks</p>
+        </div>
+        <div class="module">
           <h3>Career</h3>
           <p>Milestones and achievements</p>
+        </div>
+        <div class="module">
+          <h3>Goals</h3>
+          <p>Personal goals with nested sub-items</p>
         </div>
         <div class="module">
           <h3>Money</h3>
@@ -316,6 +371,47 @@
         <span>Claude API</span>
         <span>Capacitor</span>
         <span>Vercel</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Release Log</h2>
+      <div class="releases">
+        <div class="release">
+          <span class="release-date">2026-04-17</span>
+          <div class="release-body">
+            <h3>Mind Dump</h3>
+            <p>Tap the mic and dictate a brain dump — groceries, meals, tasks, goals, weekend plans. Claude parses it into actions across every module; you confirm what gets saved.</p>
+          </div>
+        </div>
+        <div class="release">
+          <span class="release-date">2026-04-14</span>
+          <div class="release-body">
+            <h3>Grouped Dashboard</h3>
+            <p>Dashboard now tabs between Daily, Growth, and Life. Mood and weather sit as compact widgets you can tap to expand.</p>
+          </div>
+        </div>
+        <div class="release">
+          <span class="release-date">2026-04-12</span>
+          <div class="release-body">
+            <h3>Week & Goals</h3>
+            <p>New weekly calendar view for recurring events and one-off appointments. Personal Goals module with nested sub-items for habits and aspirations.</p>
+          </div>
+        </div>
+        <div class="release">
+          <span class="release-date">2026-04-11</span>
+          <div class="release-body">
+            <h3>Per-item Sharing</h3>
+            <p>Every module has a share toggle. Decide exactly what's yours and what's visible to your household.</p>
+          </div>
+        </div>
+        <div class="release">
+          <span class="release-date">2026-04-03</span>
+          <div class="release-body">
+            <h3>Renamed to FRAN</h3>
+            <p>Formerly Hive. Named for my partner — the person this app was built for.</p>
+          </div>
+        </div>
       </div>
     </section>
 
